@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+    </style>
+</head>
+<body>
+<input id="sql">
+<button id="sqlbtn">提交！</button>
+<div id="content"></div>
+<input type="file" id="pic">
+<div>
+    <img src="" class="hide" style="width: 300px;height: 300px">
+</div>
+<button id="imgbtn">提交图片</button>
+</body>
+<script>
+    if(typeof jQuery == 'undefined'){
+        window.alert("没有jquery");
+    }
+    var sqlbtn=document.getElementById('sqlbtn');
+    var con=document.getElementById('content');
+    sqlbtn.addEventListener("click",function () {
+        var dataParam=document.getElementById('sql').value;
+        console.log(dataParam);
+        $.ajax({
+            type: "post",
+            url: "http://localhost/dbdesign/mysqltest.php",
+            data: {
+                name:dataParam,
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log("success");
+                var jsontext=JSON.stringify(data);
+                alert(jsontext);
+                for(var i=0;i<data['data'].length;i++){
+                    console.log(data['data'][i]);
+                    con.innerHTML=JSON.stringify(data['data'][i]['tel']);
+                }
+            },
+            error: function(jqXHR) {
+                console.log("error");
+                alert(JSON.stringify(jqXHR));
+                console.log(jqXHR);
+            },
+        });
+    });
+    var imgsrc="";
+    var imgname="";
+    $('#pic').change(function () {
+        var file=this.files[0];
+        imgname=file.name;
+        console.log(imgname);
+        var r=new FileReader();
+        r.readAsDataURL(file);
+        r.onload=function (e) {
+            $("div>img").attr("src",this.result).show();
+            console.log(this.result);
+            imgsrc=this.result;
+        }
+    });
+    var imgbtn=document.getElementById('imgbtn');
+    imgbtn.addEventListener("click",function () {
+        if(imgsrc!=""){
+            $.ajax({
+                type: "post",
+                url: "http://localhost/dbdesign/img.php",
+                data: {
+                    imgsrc:imgsrc,
+                    imgname:imgname
+                },
+                dataType: 'text',
+                success: function(data) {
+                    alert(data);
+                },
+                error: function(jqXHR) {
+                    console.log("error");
+                    alert(JSON.stringify(jqXHR));
+                    console.log(jqXHR);
+                },
+            });
+        }
+    });
+</script>
+</html>

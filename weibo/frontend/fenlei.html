@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html dir="ltr" lang="en-US">
+<head>
+    <title>Dispatch WordPress Theme &raquo; Photography</title>
+
+
+    <link rel="stylesheet" href="style2.css" type="text/css" media="screen"/>
+    <!--<link rel="stylesheet" href="jquery.my-modal.1.1.winStyle.css" type="text/css" media="screen"/>-->
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="includes/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen"/>
+    <script type='text/javascript' src='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <!-- google fonts -->
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link href='http://fonts.googleapis.com/css?family=Rokkitt&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Play:400,700&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://at.alicdn.com/t/font_799865_y1ot5c8qn3g.css' rel='stylesheet' type='text/css'/>
+    <link href="https://cdn.bootcss.com/mui/3.7.1/css/mui.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/mui/3.7.1/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+    <script type="text/javascript">
+        $youziku.load("body", "60159438dd514206a3a8891d57158dfd", "Source-Han-Normal");
+        /*$youziku.load("#id1,.class1,h1", "60159438dd514206a3a8891d57158dfd", "Source-Han-Normal");*/
+        /*．．．*/
+        $youziku.draw();
+    </script>
+
+    <!-- conditional css -->
+    <style type="text/css">
+        body {
+            background: #eee url(images/bg_light_linen.png) fixed;
+        }
+
+        a {
+            color: #68AECF;
+        }
+
+        #wrapper {
+            margin: 0 auto !important;
+
+        }
+
+        #next_arrow {
+            right: 410px !important;
+            left: auto !important;
+        }
+
+        .top-bar {
+            left: auto !important;
+            margin: 0 auto !important;
+        }
+
+        .social {
+            width: 941px !important;
+        }
+
+        .shade {
+            width: 150%;
+            height: 400%;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            z-index: 1;
+            display: none;
+        }
+
+        .login {
+            background: #fff;
+            position: absolute;
+            z-index: 999;
+            display: none;
+            margin-left: 650px;
+            margin-top: 150px;
+        }
+
+        .blogtitle {
+            font-family: 微软雅黑;
+            font-size: 0.88em;
+            padding: 10px;
+        }
+
+        .blogcontent {
+            font-family: Source-Han-Normal;
+            font-size: 0.67em;
+            /*font-size: 1.1em;*/
+            /*line-height: 19.5px;*/
+        }
+
+        #fresh {
+            margin-left: 50%;
+            margin-top: 100px;
+            font-size: 2.3em;
+            position: absolute;
+            color: black;
+        }
+
+        #load {
+            margin-left: 50%;
+            margin-bottom: 50px;
+            font-size: 2.7em;
+            position: absolute;
+            color: black;
+        }
+
+        .fenleiicon {
+            font-size: 1.9em;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .post-thumb img {
+            margin-right: 10px;
+            border-radius: 0.35em;
+        }
+
+        .icon-delete {
+            float: right;
+            margin-right: 0px;
+            margin-top: 15px;
+        }
+
+        .zan {
+            color: #888888;
+        }
+
+        .zan-active {
+            color: lightcoral;
+        }
+
+        .icon-aixin_fuzhi {
+            font-size: 1.1em;
+            float: right;
+            margin-right: 15px;
+        }
+
+        .post-thumb {
+            width: 470px;
+        }
+    </style>
+</head>
+
+<body class="archive category category-photography category-15">
+
+<div class="shade"></div>
+
+<div id="outerdiv"
+     style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+    <div id="innerdiv" style="position:absolute;">
+        <img id="bigimg" style="border:5px solid #fff;" src=""/>
+    </div>
+</div>
+
+<div class="login" id="loginmodal" onmousedown="small_down(event)">
+    <h1>用户登录<span id="close-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <form method="post" class="modalinput" onsubmit="return false;">
+        <p><input type="text" id="login-account" name="login" value="" placeholder="账号"></p>
+        <p><input type="password" id="login-password" name="password" value="" placeholder="密码"></p>
+        <p class="remember_me">
+            <label>
+                <input type="checkbox" name="remember_me" id="remember_me">
+                记住密码
+            </label>
+        </p>
+        <p class="submit"><input type="submit" value="登录" id="log-submit" onclick="loginfunction()"></p>
+    </form>
+</div>
+
+<div class="login" id="regmodal" onmousedown="reg_small_down(event)">
+    <h1>用户注册<span id="regclose-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <form method="post" class="modalinput" onsubmit="return false;">
+        <p><input type="text" id="reg-account" name="login" value="" placeholder="账号(4-15位英文数字)"></p>
+        <p><input type="password" id="reg-password" name="password" value="" placeholder="密码(4-15位英文数字)"></p>
+        <p><input type="password" id="reg-password-repeat" value="" placeholder="确认密码"></p>
+        <p><input type="text" id="reg-email" name="login" value="" placeholder="邮箱"></p>
+        <p class="submit"><input type="submit" value="注册" id="reg-submit" onclick="regfunction()"></p>
+    </form>
+</div>
+
+<div class="login" id="informodal" onmousedown="small_down(event)">
+    <h1>私信<span id="inforclose-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <div class="messages-content" style="max-height: 300px;overflow: auto">
+        <!--<div class="message-content" style="margin-bottom: 5px;min-height: 65px;max-height: 65px;overflow: auto;padding: 10px">-->
+        <!--<div style="float: left" ><span style="color: black;font-family: 微软雅黑;font-size: 0.75em">dva爱你哟:     18-9-11 15:35</span><span style="color: #6d6d6d;font-family: 微软雅黑;font-size: 0.75em"><br>哈哈哈哈哈哈哈</span></div>-->
+        <!--<div style="vertical-align: middle;float: right">-->
+        <!--<i class="iconfont icon-xinxi" style="margin-right: 10px;font-size: 40px;color: #7dc9e2;vertical-align: middle" onclick="chat(this)"></i>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+
+    <div class="line"></div>
+    <div class="message-send" style="font-size: 0.75em">
+        TO:
+        <input id="receiver" style="border: 0;background: transparent;margin-bottom: 10px" placeholder="发送私信的对象">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="messagecontent"  style="border: 0;background: transparent" placeholder="私信内容内容"></textarea>
+        <br>
+        <button id="sendmessage" type="button" class="mui-btn mui-btn-outlined" style="font-size: 0.5em;margin-top: 10px;float: right;"onclick="sendmessage()">发送</button>
+    </div>
+
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div class="top-bar">
+        <div class="frame">
+            <div class="frame-inside">
+                <!-- header navigation menu -->
+                <div class="menu-header-container">
+                    <ul id="menu-header" class="nav">
+                        <li id="menu-item-109"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-109">
+                            <a href="index.html">首页</a></li>
+                        <li id="menu-item-110"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110"><a
+                                href="userblog.html" onclick="intomyblog()">我的</a></li>
+                        <li id="menu-item-85"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-85"><a
+                                href="#" style="color: #2e6da4" style="cursor: default">分类</a>
+
+                            <ul class="sub-menu">
+                                <li id="我的关注"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-36" onclick="intoguanzhu()">
+
+                                    <a
+                                            href="userblog.html"><i class="fenleiicon iconfont icon-icon_concern"></i>我的关注</a></li>
+                                <li id="杂谈"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-36"
+                                    onclick="intofenlei(this)">
+
+                                    <a
+                                            href="fenlei.html"><i class="fenleiicon iconfont icon-zazhimagazine1"></i>杂谈</a>
+                                </li>
+                                <li id="游戏"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-iconfontyouxihudong"></i>游戏</a>
+                                </li>
+                                <li id="生活"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-shenghuo"></i>生活</a>
+                                </li>
+                                <li id="广告"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-guanggao"></i>广告</a>
+                                </li>
+                                <li id="娱乐"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-yule"></i>娱乐</a>
+                                </li>
+                                <li id="影视"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-dianyingshipin"></i>影视</a>
+                                </li>
+                                <li id="科技"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37"
+                                    onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-keji"></i>科技</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="menu-item-218"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                href="contact.html">写微博</a></li>
+                        <li id="loginbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                style="color: #68AECF" id="loginbtna">登陆</a></li>
+                        <li id="regbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                style="color: #68AECF">注册</a></li>
+                        <li id="inforbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"
+                            style="padding: 10px">
+                            <i class="iconfont icon-notice" style="color: #a4a4a4;margin-top: 50px"></i>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="style-switcher nav">
+                    <li><a href="#" id="account" style="color: darkred;cursor: default">您还未登录</a>
+                    </li>
+                </ul>
+
+                <!-- social icons -->
+                <div id="social-strip-icons">
+                    <div class="fadehover">
+                        <a href="#" title="twitter"><img src="images/icon-twitter.png" alt="twitter" class="a"/></a>
+                        <a href="#" title="twitter"><img src="images/icon-twitter-color.png" alt="twitter"
+                                                         class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="dribbble"><img src="images/icon-dribbble.png" alt="dribbble" class="a"/></a>
+                        <a href="#" title="dribbble"><img src="images/icon-dribbble-color.png" alt="twitter" class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="vimeo"><img src="images/icon-vimeo.png" alt="vimeo" class="a"/></a>
+                        <a href="#" title="vimeo"><img src="images/icon-vimeo-color.png" alt="vimeo" class="b"/></a>
+                    </div>
+
+
+                    <div class="fadehover">
+                        <a href="mailto:#" title="email"><img src="images/icon-email.png" alt="email" class="a"/></a>
+                        <a href="mailto:#" title="email"><img src="images/icon-email-color.png" alt="email" class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="facebook"><img src="images/icon-facebook.png" alt="facebook" class="a"/></a>
+                        <a href="#" title="facebook"><img src="images/icon-facebook-color.png" alt="facebook"
+                                                          class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="http://www.flickr.com/photos/64104492@N02/" title="flickr"><img
+                                src="images/icon-flickr.png" alt="flickr" class="a"/></a>
+                        <a href="http://www.flickr.com/photos/64104492@N02/" title="flickr"><img
+                                src="images/icon-flickr-color.png" alt="flickr" class="b"/></a>
+                    </div>
+
+
+                    <div class="fadehover">
+                        <a href="#" title="tumblr"><img src="images/icon-tumblr.png" alt="flickr" class="a"/></a>
+                        <a href="#" title="tumblr"><img src="images/icon-tumblr-color.png" alt="tumblr" class="b"/></a>
+                    </div>
+                </div>
+
+                <!-- If it's the main page, category, or search page show the sorting drop menu. -->
+                <ul class="nav filter-list filter">
+                    <li id="menu-item-27" class="sort-posts all-projects"><a href="#" style="cursor: default">猜你喜欢</a>
+                        <ul class="sub-menu" style="visibility: hidden; ">
+                            <li class="active all-projects"><a href="userblog.html" title="热搜榜" onclick="intoresou()">热搜榜<i
+                                    class="iconfont icon-huo" style="margin-left: 7.5px;color: lightsalmon"></i></a>
+                            </li>
+                            <li class="cat-item articles"><a href="userblog.html" title="推荐榜" onclick="intotuijian()">推荐榜<i
+                                    class="iconfont icon-zan" style="margin-left: 7.5px;color:lightsalmon"></i></a></li>
+                            、
+                        </ul>
+                    </li>
+                </ul><!-- filter list -->
+            </div><!-- frame inside -->
+        </div><!-- frame -->
+    </div><!-- top bar -->
+
+    <i class="iconfont icon-shuaxin" id="fresh" onclick="fresh(5)"></i>
+
+    <div style="clear:both;"></div>
+
+    <div id="main" class="clearfix">
+
+        <!-- grab the sidebar -->
+        <div id="sidebar-wrap" class="clearfix">
+            <div id="sidebar">
+
+                <!--&lt;!&ndash; grab the logo &ndash;&gt;-->
+                <!--<h1>-->
+                <!--<a href="http://okaythemes.com/dispatch/"><img class="logo" src="images/assets/dispatch3.png"-->
+                <!--alt="Bugatti Type 35B"/></a>-->
+                <!--</h1>-->
+
+                <!--&lt;!&ndash; otherwise show the site title and description &ndash;&gt;-->
+
+                <!--&lt;!&ndash; grab sidebar widgets &ndash;&gt;-->
+                <!--<div class="widget"><h2 class="widgettitle">About Me</h2>-->
+                <!--<div class="textwidget">I'm Dispatch, a blog-style WordPress theme with sweet sorting capabilities,-->
+                <!--custom widgets and a sticky sidebar.-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="widget">-->
+                <!--<div class="flickr">-->
+                <!--<h2 class="widgettitle">Flickr</h2>-->
+                <!--<ul class="flickrPhotos">-->
+                <!--<li><a class="lightbox" rel="flickr"-->
+                <!--href=""-->
+                <!--title="Shot_1299500925"><img-->
+                <!--src=""-->
+                <!--alt="Shot_1299500925" title="Shot_1299500925"/></a></li>-->
+                <!--<li><a class="lightbox" rel="flickr"-->
+                <!--href=""-->
+                <!--title="Shot_1299503390"><img-->
+                <!--src=""-->
+                <!--alt="Shot_1299503390" title="Shot_1299503390"/></a></li>-->
+                <!--<li><a class="lightbox" rel="flickr"-->
+                <!--href=""-->
+                <!--title="Shot_1299581396"><img-->
+                <!--src=""-->
+                <!--alt="Shot_1299581396" title="Shot_1299581396"/></a></li>-->
+                <!--<li><a class="lightbox" rel="flickr"-->
+                <!--href=""-->
+                <!--title="Shot_1300245514"><img-->
+                <!--src=""-->
+                <!--alt="Shot_1300245514" title="Shot_1300245514"/></a></li>-->
+                <!--</ul>-->
+                <!--<div style="clear:both;"></div>-->
+                <!--<a target="_blank" class="flickr-more" href="http://flickr.com/photos/64104492@N02" title="">More-->
+                <!--Photos &rarr;</a>-->
+                <!--</div>-->
+                <!--</div>-->
+
+
+            </div><!--sidebar-->
+
+            <div style="clear:both;"></div>
+
+            <!-- grab the sticky sidebar on the main blog pages, hide it on inside pages -->
+
+            <div id="sticky" class="clearfix">
+                <h2 class="sticky-title" style="width: 100%">Search</h2>
+
+                <div class="widget">
+                    <div class="twitter-box">
+                        <h2 style="font-family: 微软雅黑">搜索</h2>
+                        <p>
+                            你可以在下方搜索框中寻找喜欢的内容
+                        </p>
+                    </div>
+
+                </div>
+                <div class="widget">
+                    <form action="#" class="search-form clearfix" onsubmit="return false;">
+
+                        <input type="text" class="search-form-input text" name="s"
+                               onfocus="if (this.value == 'search the site') {this.value = '';}"
+                               onblur="if (this.value == '') {this.value = 'search the site';}"
+                               value="search the site"
+                               style="height: 35px"
+                               id="searchinput"/>
+                        <input type="submit" style="margin-top: 15px" value="Go" class="submit" id="searchbtn"
+                               onclick="vaguesearch()"/>
+
+                    </form>
+                </div>
+            </div><!-- sticky -->
+
+
+        </div><!-- sidebar wrap -->
+        <div id="content" class="filter-posts">
+
+
+            <div style="clear:both;"></div>
+
+            <div class="post-nav">
+                <div class="postnav-left"></div>
+                <div class="postnav-right"></div>
+                <div style="clear:both;"></div>
+            </div><!--end post navigation-->
+
+
+            <!-- grab comments on single pages -->
+        </div><!--content-->
+        <div class="push"></div>
+    </div><!--main-->
+
+    <i class="iconfont icon-unie60e" id="load" onclick="load()"></i>
+
+
+    <!-- grab footer -->
+
+</div><!-- wrapper -->
+
+<!-- google analytics code -->
+
+<script type='text/javascript' src='includes/js/fancybox/jquery.fancybox-1.3.4.pack.js'></script>
+<script type='text/javascript' src='includes/js/jquery.sticky.js'></script>
+<!--<script type='text/javascript' src='includes/js/quicksand/jquery-css-transform.js'></script>-->
+<script type='text/javascript' src='includes/js/quicksand/jquery.easing.1.3.js'></script>
+<script type='text/javascript' src='includes/js/quicksand/quicksand.js'></script>
+<script type='text/javascript' src='includes/js/ajax.js'></script>
+<script type="text/javascript">
+    /* <![CDATA[  */
+
+    var J = jQuery.noConflict();
+
+    J(document).ready(function () {
+
+        // Drop Menu
+        function mainmenu() {
+            J(".nav ul ").css({display: "none"}); // Opera Fix
+            J(".nav li").hover(function () {
+                J(this).find('ul:first').css({visibility: "visible", display: "none"}).slideDown(200);
+            }, function () {
+                J(this).find('ul:first').css({visibility: "hidden"});
+            });
+        }
+
+        mainmenu();
+
+        // Fade Icons
+        J("img.a").hover(
+            function () {
+                J(this).stop().animate({"opacity": "0"}, "fast");
+            },
+            function () {
+                J(this).stop().animate({"opacity": "1"}, "fast");
+            });
+
+        // Fade Hover Links
+        J(".entry-title a").hover(
+            function () {
+                J(this).animate({"opacity": ".7"}, "fast");
+            },
+            function () {
+                J(this).animate({"opacity": "1"}, "fast");
+            });
+
+        // Remove Margins
+        J(".flickrPhotos > li:nth-child(2n)").addClass('remove-margin');
+        J('#sidebar > div').last().addClass('last-sidebar');
+
+        // Sticky Sidebar
+        J('#sticky > div').last().addClass('last-sidebar');
+        J("#sticky").sticky({topSpacing: 90, className: 'sticky'});
+
+        J(".lightbox").fancybox({
+            'titlePosition': 'outside',
+            'overlayColor': '#ddd',
+            'overlayOpacity': 0.9,
+            'titleShow': 'false',
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'speedIn': '1400',
+            'speedOut': '1400',
+            'easingIn': 'easeOutBounce',
+            'easingOut': 'easeOutBounce'
+        });
+
+        // Quicksand Filtering
+        var $data = J(".filter-posts").clone();
+
+        J('.filter-list li').click(function (e) {
+            J(".filter li").removeClass("active");
+            // Use the last category class as the category to filter by.
+            var filterClass = J(this).attr('class').split(' ').slice(-1)[0];
+
+            if (filterClass == 'all-projects') {
+                var $filteredData = $data.find('.project');
+            } else {
+                var $filteredData = $data.find('.project[data-type=' + filterClass + ']');
+            }
+            J(".filter-posts").quicksand($filteredData, {
+                duration: 700,
+                easing: 'jswing',
+                adjustHeight: 'dynamic'
+            });
+            J(this).addClass("active");
+            return false;
+        });
+    });
+    /* ]]> */
+</script>
+<script>
+    // 模态框
+    var btn = document.getElementById('loginbtn');
+    btn.addEventListener("click", function () {
+        console.log("click");
+    });
+    jQuery('#loginbtn').bind("click", function () {
+        console.log("click");
+        if (!localStorage.getItem('account')) {
+            jQuery(".shade").fadeIn(1000);
+            jQuery("#loginmodal").fadeIn(1000);
+            // $(this).css("display","none");
+            // showShade();
+        } else {
+            localStorage.removeItem('account');
+            mui.alert('确认退出？', '提示', '确认', function () {
+                window.location.href = "index.html";
+            });
+        }
+    });
+    jQuery('#close-btn').bind("click", function () {
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#loginmodal").fadeOut(1000);
+    });
+
+</script>
+<script>
+    // 模态框reg
+    var btn = document.getElementById('regclose-btn');
+    btn.addEventListener("click", function () {
+        console.log("click");
+    });
+    jQuery('#regbtn').bind("click", function () {
+        console.log("click");
+        jQuery(".shade").fadeIn(1000);
+        jQuery("#regmodal").fadeIn(1000);
+        // $(this).css("display","none");
+        // showShade();
+    });
+    jQuery('#regclose-btn').bind("click", function () {
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#regmodal").fadeOut(1000);
+    });
+
+</script>
+<script>
+    //模态框infor
+    //查看通知事件
+    var btn=document.getElementById('inforclose-btn');
+    btn.addEventListener("click",function () {
+        console.log("click 通知");
+    });
+    jQuery('#inforbtn').bind("click",function(){
+        console.log("click");
+        jQuery(".shade").fadeIn(1000);
+        jQuery("#informodal").fadeIn(1000);
+        // $(this).css("display","none");
+        // showShade();
+    });
+    jQuery('#inforclose-btn').bind("click",function(){
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#informodal").fadeOut(1000);
+    });
+</script>
+<script>
+    function small_down(e) {
+        // var osmall = document.getElementById("loginmodal");
+        // var e = e || window.event;
+        // document.onmousemove = function(e) {
+        //     var e = e || window.event;
+        //     osmall.style.left = e.clientX-850 +"px";
+        //     osmall.style.top = e.clientY-180  +"px";
+        // };
+        // /*鼠标的抬起事件,终止拖动*/
+        // document.onmouseup = function() {
+        //     document.onmousemove = null;
+        //     document.onmouseup = null;
+        // };
+    }
+
+    function reg_small_down(e) {
+        // var osmall = document.getElementById("regmodal");
+        // var e = e || window.event;
+        // document.onmousemove = function(e) {
+        //     var e = e || window.event;
+        //     osmall.style.left = e.clientX-850 +"px";
+        //     osmall.style.top = e.clientY-180  +"px";
+        // };
+        // /*鼠标的抬起事件,终止拖动*/
+        // document.onmouseup = function() {
+        //     document.onmousemove = null;
+        //     document.onmouseup = null;
+        // };
+    }
+</script>
+<script>
+
+    console.log("当前用户为" + localStorage.getItem("account"));
+    // var currentaccount=JSON.parse(localStorage.getItem("account"));
+    if (localStorage.getItem("account")) {
+        var ac = document.getElementById("account");
+        ac.innerHTML = "用户:" + localStorage.getItem("account");
+        var loginbtna = document.getElementById('loginbtna');
+        loginbtna.innerText = "退出";
+    }
+
+    //登陆＆注册
+    function regfunction() {
+        var account = document.getElementById('reg-account');
+        var password = document.getElementById('reg-password');
+        var password_repeat = document.getElementById('reg-password-repeat');
+        var email = document.getElementById('reg-email');
+        console.log("点击了注册按钮 注册信息为" + account.value + " " + password.value + " " + password_repeat.value + " " + email.value);
+        var reginfo = {
+            "account": account.value,
+            "password": password.value,
+            "password_repeat": password_repeat.value,
+            "email": email.value
+        }
+        var regsta = ajaxreg(reginfo);
+        console.log("开始等待");
+        console.log("regsta为" + regsta);
+        if (regsta == "accountlength1") {
+            alert("用户名过短");
+        } else if (regsta == "accountlength2") {
+            alert("用户名过长");
+        } else if (regsta == "psdlength") {
+            alert("密码过长或过短");
+        } else if (regsta == "repeaterror") {
+            alert("两次密码不一致");
+        } else if (regsta == "emailerror") {
+            alert("邮箱错误");
+        } else if (regsta == "accountbusy") {
+            alert("用户名被占用");
+        } else if (regsta == "dberror") {
+            alert("后台出现错误,请稍后再试");
+        } else if (regsta == "regsuccess") {
+            mui.alert('注册成功', '提示', '确定', function () {
+                window.location.href = "index.html";
+            });
+        } else {
+            alert("网络错误 请稍后再试");
+        }
+    }
+
+    // var loginbtn=document.getElementById('log-submit');
+    // loginbtn.addEventListener("click",function () {
+    //     login();
+    // });
+    function loginfunction() {
+        console.log("click login");
+        var account = document.getElementById('login-account');
+        var password = document.getElementById('login-password');
+        var accountdata = account.value;
+        var logininfo = {
+            "account": accountdata,
+            "password": password.value
+        }
+        console.log("登陆的用户名和密码为:" + accountdata + " " + password.value);
+        var loginsta = ajaxlogin(logininfo);
+        console.log("loginsta为:" + loginsta);
+
+        if (loginsta == "dberror") {
+            alert("后台出现错误或网络 请稍后再试")
+        } else if (loginsta == "noaccount") {
+            alert("用户名不存在");
+        } else if (loginsta == "passwordfalse") {
+            alert("用户名或密码错误");
+        } else {
+            mui.alert('登陆成功', '提示', '确定', function () {
+                localStorage.setItem("account", accountdata);
+                console.log("localstorage account:" + accountdata);
+                var ac = document.getElementById("account");
+                ac.innerHTML = "用户:" + account.value;
+                var loginbtna = document.getElementById('loginbtna');
+                loginbtna.innerText = '退出';
+                window.location.href = "index.html";
+            });
+
+        }
+    }
+</script>
+
+<style type="text/css">
+    .light-linen {
+        background: #333 url(images/bg_light_linen.png) fixed;
+    }
+
+    .dark-linen {
+        background: #333 url(images/bg_dark_linen.png) fixed;
+    }
+
+    .dark-stone {
+        background: #32363b url(images/bg_stone_dark.png) fixed;
+    }
+
+    .light-stone {
+        background: #eee url(images/bg_stone.png) fixed;
+    }
+
+    .light-plaid {
+        background: #ccc url(images/bg_plaid.png) fixed;
+    }
+
+    .dark-plaid {
+        background: #323232 url(images/bg_dark_plaid.png) fixed;
+    }
+
+    .light-scales {
+        background: #eee url(images/bg_scales.png) fixed;
+    }
+</style>
+
+<script type="text/javascript">
+    /* <![CDATA[  */
+
+    var J = jQuery.noConflict();
+
+    J(document).ready(function () {
+
+        //Style Switcher
+        J("li.one").click(function () {
+            J
+            ("body").removeClass('dark-linen , dark-stone , light-stone , light-plaid , dark-plaid , light-scales').addClass("light-linen");
+        });
+
+        J("li.two").click(function () {
+            J
+            ("body").removeClass('light-linen , dark-stone , light-stone , light-plaid , dark-plaid , light-scales').addClass("dark-linen");
+        });
+
+        J("li.three").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , light-stone , light-plaid , dark-plaid , light-scales").addClass("dark-stone");
+        });
+
+        J("li.four").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-plaid , dark-plaid , light-scales").addClass("light-stone");
+        });
+
+        J("li.five").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , dark-plaid , light-scales").addClass("light-plaid");
+        });
+
+        J("li.six").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , light-plaid , light-scales").addClass("dark-plaid");
+        });
+
+        J("li.seven").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , light-plaid , dark-plaid").addClass("light-scales");
+        });
+
+    });
+    /* ]]> */
+</script>
+<script>
+
+    var currentblognum = 5;
+    var cueerntstyle = localStorage.getItem("style");
+    if (cueerntstyle) {
+        console.log("style:" + localStorage.getItem("style"));
+        getblog(5);
+    }
+
+    //从数据库中获取最新的五条blog
+    function getblog(limit) {
+        console.log("两个参数为" + localStorage.getItem("style") + " " + limit);
+        var info = {
+            'limit': 5,
+            'style': localStorage.getItem("style")
+        }
+        var blogs = ajaxgetstyle(info);
+        var blogsdata = blogs['blogs'];
+        var blogmain = document.getElementById('content');
+        for (var i = 0; i < blogsdata.length; i++) {
+            var newsid = blogsdata[i][0];
+
+            var title = blogsdata[i]['title'];
+            var content = blogsdata[i]['content'];
+            var time = blogsdata[i]['time'];
+
+            var contentelps = content;
+            if (content.length > 350) {
+                contentelps = content.substr(0, 300) + "<br><b style='color: black;'>......查看全部<b>";
+            }
+
+            var img = blogsdata[i]['img'];
+            var kgb = img.width / img.height;
+
+            var img2 = blogsdata[i]['img2'];
+            var kgb2 = img.width / img2.height;
+
+            var img3 = blogsdata[i]['img3'];
+            var kgb3 = img.width / img3.height;
+
+            var author = blogsdata[i]['author'];
+
+            var del = "";
+            // if(author==localStorage.getItem('account')){
+            //     del='<span class="iconfont icon-delete" id="'+newsid+'" onclick="deletenews(this)">';
+            // }
+
+            var zannum = ajaxgetzannum(newsid);
+            console.log("得到的zannum:" + zannum);
+
+
+            var zanhtml;
+            var zansta = ajaxgetifzan(localStorage.getItem('account'), newsid);
+            console.log(title + "zan sta=" + zansta);
+            if (zansta == 'zaned') {
+                zanhtml = '<div><i class="iconfont icon-aixin_fuzhi zan-active" onclick="togglezan(this)" id="' + newsid + '">' + zannum + '</i></div>';
+            } else {
+                zanhtml = '<div><i class="iconfont icon-aixin_fuzhi zan" onclick="togglezan(this)" id="' + newsid + '">' + zannum + '</i></div>';
+            }
+
+            var style = blogsdata[i]['style'];
+            var ymd = time.split('-');
+            var year = ymd[0];
+            var month;
+            if (ymd[1] == 1) {
+                month = "Jan";
+            } else if (ymd[1] == 2) {
+                month = "Feb";
+            } else if (ymd[1] == 3) {
+                month = "Mar";
+            } else if (ymd[1] == 4) {
+                month = "Apr";
+            } else if (ymd[1] == 5) {
+                month = "May";
+            } else if (ymd[1] == 6) {
+                month = "Jun";
+            } else if (ymd[1] == 7) {
+                month = "Jul";
+            } else if (ymd[1] == 8) {
+                month = "Aug";
+            } else if (ymd[1] == 9) {
+                month = "Sep";
+            } else if (ymd[1] == 10) {
+                month = "Oct";
+            } else if (ymd[1] == 11) {
+                month = "Nov";
+            } else {
+                month = "Dec";
+            }
+            var day = ymd[2];
+            console.log(title + " " + content + " " + time + " " + img + " " + author + " " + year + " " + month + " " + day);
+
+            var imgshtml = '';
+            if (img) {
+                imgshtml += '<img width="145" height="' + 140 + '"' + 'src="' + img + '"' + 'class="pimg attachment-post-image wp-post-image"' + 'alt="download"' + 'title="download"/>';
+            }
+            if (img2) {
+                imgshtml += '<img width="145" height="' + 140 + '"' + 'src="' + img2 + '"' + 'class="pimg attachment-post-image wp-post-image"' + 'alt="download"' + 'title="download"/>';
+            }
+            if (img3) {
+                imgshtml += '<img width="145" height="' + 140 + '"' + 'src="' + img3 + '"' + 'class="pimg attachment-post-image wp-post-image"' + 'alt="download"' + 'title="download"/>';
+            }
+
+            //获取评论
+            var comments=ajaxgetcomments(newsid);
+            comments=comments['blogs'];
+            var commentcontent="";
+
+            for(var ii=0;ii<comments.length;ii++){
+                var delcomment="";
+                if(comments[ii][1]==localStorage.getItem('account')){
+                    delcomment='<span id="'+comments[ii][0]+'" class="iconfont icon-delete" style="font-size: 0.3em;float: right;margin-top: 0px" onclick="delcomment(this)"></span>';
+                }
+                commentcontent+='<div><a class="title" href="userblog.html" id="'+comments[ii][1]+'" style="color: #5fa3d2" onclick="intohisblog(this)">'+comments[ii][1]+':</a>'+delcomment+'&nbsp;&nbsp;&nbsp;'+comments[ii][3]+'</div>';
+            }
+            var commentnum=comments.length;
+
+            var blogcard = '<div data-id="post-81" data-type="photography" class="post-81 photography post clearfix project" class="blogcard">' +
+                '<div class="box">' +
+                '<div class="shadow clearfix">' +
+                '<div class="frame">' +
+                '<h2 class="entry-title"><a href="#" title="' + title + '" class="blogtitle">' +
+                title +
+                '</a>' + del + '</h2>' +
+                '<div class="okvideo">' +
+                '</div>' +
+                '<p class="blogcontent" onclick="getallcontent(this,\' ' + content + '\')"' + contentelps + '</p>\n' +
+                '<a class="post-thumb" href="#" title="' + title + '">' + imgshtml + '</a>' +
+                zanhtml +
+
+                '                        </div><!-- frame -->\n' +
+                '                    </div><!-- shadow -->\n' +
+                '\n' +
+                '                    <!-- meta info bar -->\n' +
+                '                    <div class="bar">\n' +
+                '                        <div class="bar-frame clearfix">\n' +
+                '                            <div class="date">\n' +
+                '                                <strong class="day">' + day + '</strong>\n' +
+                '                                <div class="holder">\n' +
+                '                                    <span class="month">' + month + '</span>\n' +
+                '                                    <span class="year">' + year + '</span>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                            <div class="author">\n' +
+                '                                <strong class="title">作者</strong>\n' +
+                '                                <a href="#" title="Visit Mike McAlister&#8217;s website"\n' +
+                '                                   rel="external" id="' + author + '" onclick="intohisblog(this)">' + author + '</a>\n' +
+                '                            </div>\n' +
+                '                            <div class="categories">\n' +
+                '                                <strong class="title">分类</strong>\n' +
+                '                                <p><a href="fenlei.html" id="' + style + '" title="View all posts in Photography" rel="category" onclick="intofenlei(this)">' + style + '</a></p>\n' +
+                '                            </div>\n' +
+                '                            <div class="categories">\n' +
+                '                                <strong class="title">评论数</strong>\n' +
+                '                                <p><a href="#" title="View all posts in Photography" rel="category"">'+commentnum+'</a></p>\n' +
+                '                            </div>\n' +
+                '\n' +
+                '\n' +
+                '                        </div><!-- bar frame -->\n' +
+                '                    </div><!-- bar -->\n' +
+                '<div class="bar bar-comment"><div class="comments-content">'+commentcontent+'</div></div>'+
+                '<div class="bar bar-comment-input"><input type="text" placeholder="输入评论" class="comments-input" style="width: 60%;padding: 0.6px;height: 25px;margin-bottom: 2px;margin-left:5px;margin-top: 2px;font-size: 0.7px;border: 0;background: transparent"><a style="margin-left: 5px;color: #555555" onclick="sendcommit(this,'+newsid+')">发送</a></div>'+
+                '                </div><!-- box -->\n' +
+                '            </div><!--writing post-->';
+            // blogmain.innerHTML='';
+            blogmain.innerHTML += blogcard;
+        }
+    }
+
+    function fresh(limit) {
+        console.log("开始刷新");
+        document.getElementById('content').innerHTML = '<div style="clear:both;"></div>\n' +
+            '\n' +
+            '            <div class="post-nav">\n' +
+            '                <div class="postnav-left"></div>\n' +
+            '                <div class="postnav-right"></div>\n' +
+            '                <div style="clear:both;"></div>\n' +
+            '            </div>';
+        console.log("清空");
+        getblog(limit);
+    }
+
+    function load() {
+        var limit = currentblognum + 3;
+        currentblognum = limit;
+        fresh(limit);
+    }
+</script>
+<script>
+    function intomyblog() {
+        localStorage.setItem('uors', 'u');
+        localStorage.setItem("userblog", localStorage.getItem('account'));
+    }
+
+    function intohisblog(author) {
+        console.log("刚开始的userblog:" + localStorage.getItem('userblog'));
+        localStorage.setItem("userblog", author.id);
+        localStorage.setItem('uors', 'u');
+        console.log("之后的userblog:" + localStorage.getItem('userblog'));
+        window.location.href = 'userblog.html';
+        // console.log('点击了作者:'+author.id);
+    }
+
+    // var currentstyle=localStorage.getItem('style');
+    // document.getElementById(currentstyle).style.color = '#2e6da4';
+
+    function intofenlei(style) {
+        console.log("刚开始的style:" + localStorage.getItem('style'));
+        localStorage.setItem("style", style.id);
+        console.log("之后的style:" + localStorage.getItem('style'));
+        fresh(5);
+    }
+
+    function intoresou() {
+        localStorage.setItem('uors', 'r');
+    }
+
+    function intotuijian() {
+        localStorage.setItem('uors', 't');
+    }
+    function intoguanzhu() {
+        localStorage.setItem('uors','guanzhu');
+    }
+
+    vaguesearch = function () {
+        var input = document.getElementById('searchinput');
+        var keywords = input.value;
+        localStorage.setItem('keywords', keywords);
+        localStorage.setItem('uors', 's');
+
+        console.log("keywords:" + localStorage.getItem('keywords') + " uors:" + localStorage.getItem('uors'));
+        window.location.href = "userblog.html";
+
+    }
+</script>
+
+<script>
+    var $ = jQuery;
+    jQuery(".pimg").click(function () {
+        console.log("点击了");
+        var _this = jQuery(this);//将当前的pimg元素作为_this传入函数
+        imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+    });
+
+    function imgShow(outerdiv, innerdiv, bigimg, _this) {
+        console.log("执行imgshow");
+        var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
+        $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+
+        /*获取当前点击图片的真实大小，并显示弹出层及大图*/
+        $("<img/>").attr("src", src).load(function () {
+            var windowW = $(window).width();//获取当前窗口宽度
+            var windowH = $(window).height();//获取当前窗口高度
+            var realWidth = this.width;//获取图片真实宽度
+            var realHeight = this.height;//获取图片真实高度
+            var imgWidth, imgHeight;
+            var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
+
+            if (realHeight > windowH * scale) {//判断图片高度
+                imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
+                imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
+                if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度
+                    imgWidth = windowW * scale;//再对宽度进行缩放
+                }
+            } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度
+                imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放
+                imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度
+            } else {//如果图片真实高度和宽度都符合要求，高宽不变
+                imgWidth = realWidth;
+                imgHeight = realHeight;
+            }
+            $(bigimg).css('width', imgWidth);//以最终的宽度对图片缩放
+
+            var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
+            var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
+            $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
+            $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
+        });
+
+        $(outerdiv).click(function () {//再次点击淡出消失弹出层
+            $(this).fadeOut("fast");
+        });
+    }
+
+    getallcontent = function (p, content) {
+        console.log("得到全部新闻");
+        console.log(content);
+        if (content.length > 100) {
+            p.innerHTML = content;
+        }
+        // console.log(content);
+        // var news=content+"---------------------------";
+        // p.innerText=news;
+    }
+
+    deletenews = function (news) {
+        var newsid = news.id;
+        console.log("删除id：" + newsid);
+        var btnArray = ['否', '是'];
+        if (localStorage.getItem('userblog') == localStorage.getItem('account')) {
+            mui.confirm('确认删除本条微博吗', '提示', btnArray, function (e) {
+                if (e.index == 1) {
+                    // test();
+                    var returndata = ajaxdeletenews(newsid);
+                    if (returndata == "deletesuccess") {
+                        console.log("delete success");
+                        mui.alert('删除成功', '提示', '确定', function () {
+                            window.location.href = "userblog.html";
+                        });
+                    }
+                } else {
+                }
+            });
+
+        }
+    }
+</script>
+<script>
+    // 点赞
+    togglezan = function (zanicon) {
+        if (localStorage.getItem('account')) {
+            if (zanicon.classList.contains('zan-active')) {
+                ajaxdeletezan(localStorage.getItem('account'), zanicon.id);
+                zanicon.classList.remove('zan-active');
+                zanicon.classList.add('zan');
+                zanicon.innerText--;
+            } else if (zanicon.classList.contains('zan')) {
+                ajaxaddzan(localStorage.getItem('account'), zanicon.id);
+                zanicon.classList.remove('zan');
+                zanicon.classList.add('zan-active');
+                zanicon.innerText++;
+            }
+        }
+
+    }
+</script>
+<script>
+    //加载侧边栏
+    function loadwidget() {
+        console.log("---------------load widget-------------------")
+        var uors = localStorage.getItem('uors');
+        var username;
+        var fenleihtml='';
+        if(localStorage.getItem('style')=='游戏'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">游戏分区</h2>\n'+
+            '<p>分享你在游戏中的精彩时刻吧</p>';
+        }else if(localStorage.getItem('style')=='杂谈'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">杂谈分区</h2>\n'+
+                '<p>随便说说</p>';
+        }else if(localStorage.getItem('style')=='生活'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">生活分区</h2>\n'+
+                '<p>生活趣事</p>';
+        }else if(localStorage.getItem('style')=='广告'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">广告分区</h2>\n'+
+                '<p>买卖东西，说出你的需要</p>';
+        }else if(localStorage.getItem('style')=='娱乐'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">娱乐分区</h2>\n'+
+                '<p>娱乐八卦</p>';
+        }else if(localStorage.getItem('style')=='影视'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">影视分区</h2>\n'+
+                '<p>聊电影电视剧</p>';
+        }else if(localStorage.getItem('style')=='科技'){
+            fenleihtml='                    <h2 class="widgettitle" style="font-family: 微软雅黑">科技分区</h2>\n'+
+                '<p>前沿技术</p>';
+        }
+        var widgethtml = '<!-- grab the logo -->\n' +
+            '                <h1>\n' +
+            // '                    <a href="http://okaythemes.com/dispatch/"><img class="logo" src="images/assets/dispatch3.png"\n' +
+            // '                                                                   alt="Bugatti Type 35B"/></a>\n' +
+            '                </h1>\n' +
+            '\n' +
+            '                <!-- otherwise show the site title and description -->\n' +
+            '\n' +
+            '                <!-- grab sidebar widgets -->\n' +
+            '                <div class="widget" style="margin-top: 20px">\n' +
+            fenleihtml+
+            '                </div>\n' ;
+        var slidebar = document.getElementById('sidebar');
+        slidebar.innerHTML = widgethtml;
+    }
+
+    loadwidget();
+    getmessage();
+</script>
+</body>
+</html>

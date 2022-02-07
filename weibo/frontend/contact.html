@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <title>Dispatch WordPress Theme &raquo; Photography</title>
+
+    <link rel="stylesheet" href="style2.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="includes/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!-- google fonts -->
+    <!-- <link href='http://fonts.googleapis.com/css?family=Rokkitt&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Play:400,700&amp;v2' rel='stylesheet' type='text/css'/>
+    <link href='http://at.alicdn.com/t/font_799865_y1ot5c8qn3g.css' rel='stylesheet' type='text/css'/> -->
+    <!--<link href="https://cdn.bootcss.com/mui/3.7.1/css/mui.min.css" rel="stylesheet">-->
+    <!--<script src="https://cdn.bootcss.com/mui/3.7.1/js/mui.min.js"></script>-->
+
+
+    <!-- conditional css -->
+    <style type="text/css">
+        body {
+            background: #eee url(images/bg_light_linen.png) fixed;
+        }
+
+        a {
+            color: #68AECF;
+        }
+
+        .post .frame {
+            width: 660px;
+        }
+
+        #wrapper {
+            margin: 0 auto !important;
+
+        }
+
+        #next_arrow {
+            right: 410px !important;
+            left: auto !important;
+        }
+
+        .top-bar {
+            left: auto !important;
+            margin: 0 auto !important;
+        }
+
+        .social {
+            width: 941px !important;
+        }
+
+        .shade {
+            width: 150%;
+            height: 400%;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            z-index: 1;
+            display: none;
+        }
+
+        .login {
+            background: #fff;
+            position: absolute;
+            z-index: 999;
+            display: none;
+            margin-left: 650px;
+            margin-top: 150px;
+        }
+
+        .imgselecttext {
+            position: absolute;
+            margin-left: 5px;
+            margin-top: 3px;
+            z-index: 1;
+            vertical-align: middle;
+        }
+
+        .imgselect {
+            opacity: 0;
+            position: absolute;
+            z-index: 2;
+
+        }
+
+        .selectimgview {
+            margin-left: 0px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .fenleiicon{
+            font-size: 1.9em;
+            color: white;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body class="page page-id-2 page-template-default">
+
+<div class="shade"></div>
+
+<div class="login" id="loginmodal" onmousedown="small_down(event)">
+    <h1>??????<span id="close-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <form method="post" class="modalinput" onsubmit="return false;">
+        <p><input type="text" id="login-account" name="login" value="" placeholder="???"></p>
+        <p><input type="password" id="login-password" name="password" value="" placeholder="????"></p>
+        <p class="remember_me">
+            <label>
+                <input type="checkbox" name="remember_me" id="remember_me">
+                ???????
+            </label>
+        </p>
+        <p class="submit"><input type="submit" value="???" id="log-submit" onclick="loginfunction()"></p>
+    </form>
+</div>
+
+<div class="login" id="regmodal" onmousedown="reg_small_down(event)">
+    <h1>??????<span id="regclose-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <form method="post" class="modalinput" onsubmit="return false;">
+        <p><input type="text" id="reg-account" name="login" value="" placeholder="???(4-15��???????)"></p>
+        <p><input type="password" id="reg-password" name="password" value="" placeholder="????(4-15��???????)"></p>
+        <p><input type="password" id="reg-password-repeat" value="" placeholder="???????"></p>
+        <p><input type="text" id="reg-email" name="login" value="" placeholder="????"></p>
+        <p class="submit"><input type="submit" value="???" id="reg-submit" onclick="regfunction()"></p>
+    </form>
+</div>
+
+<div class="login" id="informodal" onmousedown="small_down(event)">
+    <h1>???<span id="inforclose-btn" style="float: right;margin-right: 6%;font-size: 1.5em;cursor:pointer">&times;</span>
+    </h1>
+    <div class="messages-content" style="max-height: 300px;overflow: auto">
+        <!--<div class="message-content" style="margin-bottom: 5px;min-height: 65px;max-height: 65px;overflow: auto;padding: 10px">-->
+        <!--<div style="float: left" ><span style="color: black;font-family: ??????;font-size: 0.75em">dva?????:     18-9-11 15:35</span><span style="color: #6d6d6d;font-family: ??????;font-size: 0.75em"><br>??????????????</span></div>-->
+        <!--<div style="vertical-align: middle;float: right">-->
+        <!--<i class="iconfont icon-xinxi" style="margin-right: 10px;font-size: 40px;color: #7dc9e2;vertical-align: middle" onclick="chat(this)"></i>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+
+    <div class="line"></div>
+    <div class="message-send" style="font-size: 0.75em">
+        TO:
+        <input id="receiver" style="border: 0;background: transparent;margin-bottom: 10px" placeholder="???????????">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="messagecontent"  style="border: 0;background: transparent" placeholder="???????????"></textarea>
+        <br>
+        <button id="sendmessage" type="button" class="mui-btn mui-btn-outlined" style="font-size: 0.5em;margin-top: 10px;float: right;"onclick="sendmessage()">????</button>
+    </div>
+
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div class="top-bar">
+        <div class="frame">
+            <div class="frame-inside">
+                <!-- header navigation menu -->
+                <div class="menu-header-container">
+                    <ul id="menu-header" class="nav">
+                        <li id="menu-item-109"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-109">
+                            <a href="index.html">???</a></li>
+                        <li id="menu-item-110"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110"><a
+                                href="userblog.html" onclick="intomyblog()">???</a></li>
+                        <li id="menu-item-85"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-85"><a
+                                href="#"  style="cursor: default">????</a>
+                            <ul class="sub-menu">
+                                <li id="?????"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-36" onclick="intoguanzhu()">
+
+                                    <a
+                                            href="userblog.html"><i class="fenleiicon iconfont icon-icon_concern"></i>?????</a></li>
+                                <li id="???"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-36" onclick="intofenlei(this)">
+
+                                    <a
+                                            href="fenlei.html"><i class="fenleiicon iconfont icon-zazhimagazine1"></i>???</a></li>
+                                <li id="???"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-iconfontyouxihudong"></i>???</a>
+                                </li>
+                                <li id="????"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-shenghuo"></i>????</a>
+                                </li>
+                                <li id="???"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-guanggao"></i>???</a>
+                                </li>
+                                <li id="????"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-yule"></i>????</a>
+                                </li>
+                                <li id="???"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-dianyingshipin"></i>???</a>
+                                </li>
+                                <li id="???"
+                                    class="fenleiitem menu-item menu-item-type-post_type menu-item-object-page menu-item-37" onclick="intofenlei(this)"><a
+                                        href="fenlei.html"><i class="fenleiicon iconfont icon-keji"></i>???</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="menu-item-218"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                href="contact.html" style="color: #2e6da4">��???</a></li>
+                        <li id="loginbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                style="color: #68AECF" id="loginbtna">???</a></li>
+                        <li id="regbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a
+                                style="color: #68AECF">???</a></li>
+                        <li id="inforbtn"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"
+                            style="padding: 10px">
+                            <i class="iconfont icon-notice" style="color: #a4a4a4;margin-top: 50px"></i>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="style-switcher nav">
+                    <li><a href="#" id="account" style="color: darkred;cursor: default">????��???</a>
+                    </li>
+                </ul>
+
+                <!-- social icons -->
+                <div id="social-strip-icons">
+                    <div class="fadehover">
+                        <a href="#" title="twitter"><img src="images/icon-twitter.png" alt="twitter" class="a"/></a>
+                        <a href="#" title="twitter"><img src="images/icon-twitter-color.png" alt="twitter"
+                                                         class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="dribbble"><img src="images/icon-dribbble.png" alt="dribbble" class="a"/></a>
+                        <a href="#" title="dribbble"><img src="images/icon-dribbble-color.png" alt="twitter" class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="vimeo"><img src="images/icon-vimeo.png" alt="vimeo" class="a"/></a>
+                        <a href="#" title="vimeo"><img src="images/icon-vimeo-color.png" alt="vimeo" class="b"/></a>
+                    </div>
+
+
+                    <div class="fadehover">
+                        <a href="mailto:#" title="email"><img src="images/icon-email.png" alt="email" class="a"/></a>
+                        <a href="mailto:#" title="email"><img src="images/icon-email-color.png" alt="email" class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="#" title="facebook"><img src="images/icon-facebook.png" alt="facebook" class="a"/></a>
+                        <a href="#" title="facebook"><img src="images/icon-facebook-color.png" alt="facebook"
+                                                          class="b"/></a>
+                    </div>
+
+                    <div class="fadehover">
+                        <a href="http://www.flickr.com/photos/64104492@N02/" title="flickr"><img
+                                src="images/icon-flickr.png" alt="flickr" class="a"/></a>
+                        <a href="http://www.flickr.com/photos/64104492@N02/" title="flickr"><img
+                                src="images/icon-flickr-color.png" alt="flickr" class="b"/></a>
+                    </div>
+
+
+                    <div class="fadehover">
+                        <a href="#" title="tumblr"><img src="images/icon-tumblr.png" alt="flickr" class="a"/></a>
+                        <a href="#" title="tumblr"><img src="images/icon-tumblr-color.png" alt="tumblr" class="b"/></a>
+                    </div>
+                </div>
+
+                <!-- If it's the main page, category, or search page show the sorting drop menu. -->
+                <ul class="nav filter-list filter">
+                    <li id="menu-item-27" class="sort-posts all-projects"><a href="#" style="cursor: default">???????</a>
+                        <ul class="sub-menu" style="visibility: hidden; ">
+                            <li class="active all-projects"><a href="userblog.html" title="?????" onclick="intoresou()">?????<i class="iconfont icon-huo" style="margin-left: 7.5px;color: lightsalmon" ></i></a></li>
+                            <li class="cat-item articles"><a href="userblog.html" title="?????" onclick="intotuijian()">?????<i class="iconfont icon-zan" style="margin-left: 7.5px;color:lightsalmon" ></i></a></li>
+
+                        </ul>
+                    </li>
+                </ul><!-- filter list -->
+            </div><!-- frame inside -->
+        </div><!-- frame -->
+    </div><!-- top bar -->
+
+    <div style="clear:both;"></div>
+    <div id="main" class="clearfix">
+
+        <!-- grab the sidebar -->
+        <div id="sidebar-wrap" class="clearfix">
+            <div id="sidebar">
+
+                <!-- grab the logo -->
+                <h1>
+                    <a href="#"><img class="logo" src="images/assets/dispatch3.png" alt="Bugatti Type 35B"/></a>
+                </h1>
+
+                <!-- otherwise show the site title and description -->
+
+                <!-- grab sidebar widgets -->
+                <div class="widget"><h2 class="widgettitle">Q????��???????????</h2>
+                    <div class="textwidget" style="margin-bottom: 10px">A:????????????????????
+                    </div>
+                    <h2 class="widgettitle">Q?????????????????????url</h2>
+                    <div class="textwidget" style="margin-bottom: 10px">A:???????????????????????????????????????????????????????????????��?
+                    </div>
+                    <h2 class="widgettitle">Q????????????????????????�</h2>
+                    <div class="textwidget">A:????????????????????????????????????????????????????
+                    </div>
+                </div>
+                <!--<div class="widget">-->
+                    <!--<div class="flickr">-->
+                        <!--<h2 class="widgettitle">Flickr</h2>-->
+                        <!--<ul class="flickrPhotos">-->
+                            <!--<li><a class="lightbox" rel="flickr"-->
+                                   <!--href=""-->
+                                   <!--title="Shot_1299500925"><img-->
+                                    <!--src=""-->
+                                    <!--alt="Shot_1299500925" title="Shot_1299500925"/></a></li>-->
+                            <!--<li><a class="lightbox" rel="flickr"-->
+                                   <!--href=""-->
+                                   <!--title="Shot_1299503390"><img-->
+                                    <!--src=""-->
+                                    <!--alt="Shot_1299503390" title="Shot_1299503390"/></a></li>-->
+                            <!--<li><a class="lightbox" rel="flickr"-->
+                                   <!--href=""-->
+                                   <!--title="Shot_1299581396"><img-->
+                                    <!--src=""-->
+                                    <!--alt="Shot_1299581396" title="Shot_1299581396"/></a></li>-->
+                            <!--<li><a class="lightbox" rel="flickr"-->
+                                   <!--href=""-->
+                                   <!--title="Shot_1300245514"><img-->
+                                    <!--src=""-->
+                                    <!--alt="Shot_1300245514" title="Shot_1300245514"/></a></li>-->
+                        <!--</ul>-->
+                        <!--<div style="clear:both;"></div>-->
+                        <!--<a target="_blank" class="flickr-more" href="http://flickr.com/photos/64104492@N02" title="">More-->
+                            <!--Photos &rarr;</a></div>-->
+                <!--</div>-->
+
+
+            </div><!--sidebar-->
+
+            <div style="clear:both;"></div>
+
+        </div><!-- sidebar wrap -->
+        <div id="content" class="filter-posts">
+            <!-- grab the posts -->
+
+            <div data-id="post-216" data-type="" class="post-216 post clearfix project">
+                <div class="box">
+                    <div class="shadow clearfix">
+                        <div class="frame">
+                            <h2 class="entry-title"><a href="javascript:return false;"
+                                                       title="Contact">WRITE MY BLOG</a></h2>
+
+                            <div class="okvideo">
+                            </div>
+
+
+                            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac purus nec diam laoreet-->
+                                <!--sollicitudin. Fusce ullamcorper imperdiet turpis, non accumsan enim egestas in.</p>-->
+                            <div class="wpcf7" id="wpcf7-f1-p216-o1">
+                                <form action="#" method="post" class="wpcf7-form" onsubmit="return false;">
+                                    <div style="display: none;">
+                                        <input type="hidden" name="_wpcf7" value="1"/>
+                                        <input type="hidden" name="_wpcf7_version" value="2.4.6"/>
+                                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1-p216-o1"/>
+                                    </div>
+                                    <p>?????<br/>
+                                        <span class="wpcf7-form-control-wrap your-name"><input type="text"
+                                                                                               disabled="true"
+                                                                                               id="your-name"
+                                                                                               value="��???,????????????"
+                                                                                               class="wpcf7-text wpcf7-validates-as-required"
+                                                                                               size="40"/></span></p>
+                                    <p>????<br/>
+                                        <span class="wpcf7-form-control-wrap your-email"><input type="text"
+                                                                                                id="your-title"
+                                                                                                value=""
+                                                                                                class="wpcf7-text wpcf7-validates-as-email wpcf7-validates-as-required"
+                                                                                                size="40"/></span></p>
+                                    <p>?????? &nbsp;
+                                        <select style="padding: 2.5px;appearance:none;font-family: ??????" id="styleselect">
+                                            <option value="???">???</option>
+                                            <option value="???">???</option>
+                                            <option value="????">????</option>
+                                            <option value="???">???</option>
+                                            <option value="????">????</option>
+                                            <option value="???">???</option>
+                                            <option value="???">???</option>
+                                        </select>
+                                    </p>
+                                    <p style="vertical-align: center">??URL(????????????url???????????????)<br/>
+                                        <span class="wpcf7-form-control-wrap your-subject"><input type="text"
+                                                                                                  onchange="getnetimgurl(this)"
+                                                                                                  id="n1"
+                                                                                                  class="your-img wpcf7-text"
+                                                                                                  value=""
+                                                                                                  size="40"/></span>
+                                        <span class="fileinput-button">
+                                            <span class="imgselecttext">??????</span>
+                                            <input type="file" class="imgselect" onchange="getimgurl(this)" id="b1">
+                                        </span>
+                                        <br>
+
+
+                                        <br/>
+
+                                        <span class="wpcf7-form-control-wrap your-subject"><input type="text"
+                                                                                                  onchange="getnetimgurl(this)"
+                                                                                                  id="n2"
+                                                                                                  class="your-img wpcf7-text"
+                                                                                                  value=""
+                                                                                                  size="40"/></span>
+                                        <span class="fileinput-button">
+                                            <span class="imgselecttext">??????</span>
+                                            <input type="file" class="imgselect" onchange="getimgurl(this)" id="b2">
+                                        </span>
+                                        <br>
+
+
+                                        <br/>
+
+                                        <span class="wpcf7-form-control-wrap your-subject"><input type="text"
+                                                                                                  onchange="getnetimgurl(this)"
+                                                                                                  id="n3"
+                                                                                                  class="your-img wpcf7-text"
+                                                                                                  value=""
+                                                                                                  size="40"/></span>
+                                        <span class="fileinput-button">
+                                            <span class="imgselecttext">??????</span>
+                                            <input type="file" class="imgselect" onchange="getimgurl(this)" id="b3">
+                                        </span>
+                                        <br>
+                                        <img class="selectimgview" >
+                                        <img class="selectimgview" >
+                                        <img class="selectimgview">
+                                    </p>
+
+                                    <p>????<br/>
+                                        <span class="wpcf7-form-control-wrap your-message"><textarea id="your-content"
+                                                                                                     cols="40"
+                                                                                                     rows="10"></textarea></span>
+                                    </p>
+                                    <p><input type="submit" value="????" class="wpcf7-submit"
+                                              onclick="sendfunction()"/><img class="ajax-loader"
+                                                                             style="visibility: hidden;"
+                                                                             id="blog-send"
+                                                                             alt="Sending ..."
+                                                                             src="http://okaythemes.com/dispatch/wp-content/plugins/contact-form-7/images/ajax-loader.gif"/>
+                                    </p>
+                                    <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                </form>
+                            </div>
+                        </div><!-- frame -->
+                    </div><!-- shadow -->
+
+                    <!-- meta info bar -->
+                    <div class="bar" style="display:none;">
+                        <div class="bar-frame clearfix">
+                            <div class="date">
+                                <strong class="day">23</strong>
+                                <div class="holder">
+                                    <span class="month">Jul</span>
+                                    <span class="year">2011</span>
+                                </div>
+                            </div>
+                            <div class="author">
+                                <strong class="title">AUTHOR</strong>
+                                <a href="http://mikemcalister.com" title="Visit Mike McAlister&#8217;s website"
+                                   rel="external">Mike McAlister</a></div>
+                            <div class="categories">
+                                <strong class="title">CATEGORY</strong>
+                                <p></p>
+                            </div>
+                            <div class="comments">
+                                <strong class="title">COMMENTS</strong>
+                                <a href="#">No Comments</a>
+                            </div>
+
+
+                        </div><!-- bar frame -->
+                    </div><!-- bar -->
+                </div><!-- box -->
+            </div><!--writing post-->
+
+            <div style="clear:both;"></div>
+
+            <div class="post-nav">
+                <div class="postnav-left"></div>
+                <div class="postnav-right"></div>
+                <div style="clear:both;"></div>
+            </div><!--end post navigation-->
+
+
+            <!-- grab comments on single pages -->
+        </div><!--content-->
+        <div class="push"></div>
+    </div><!--main-->
+
+    <!-- grab footer -->
+
+</div><!-- wrapper -->
+
+<!-- google analytics code -->
+
+<script type='text/javascript' src='includes/js/fancybox/jquery.fancybox-1.3.4.pack.js'></script>
+<script type='text/javascript' src='includes/js/jquery.sticky.js'></script>
+<script type='text/javascript' src='includes/js/quicksand/jquery-css-transform.js'></script>
+<script type='text/javascript' src='includes/js/quicksand/jquery.easing.1.3.js'></script>
+<script type='text/javascript' src='includes/js/quicksand/quicksand.js'></script>
+<!-- <script type="text/javascript">
+    /* <![CDATA[  */
+
+    var J = jQuery.noConflict();
+
+    J(document).ready(function () {
+
+        // Drop Menu
+        function mainmenu() {
+            J(".nav ul ").css({display: "none"}); // Opera Fix
+            J(".nav li").hover(function () {
+                J(this).find('ul:first').css({visibility: "visible", display: "none"}).slideDown(200);
+            }, function () {
+                J(this).find('ul:first').css({visibility: "hidden"});
+            });
+        }
+
+        mainmenu();
+
+        // Fade Icons
+        J("img.a").hover(
+            function () {
+                J(this).stop().animate({"opacity": "0"}, "fast");
+            },
+            function () {
+                J(this).stop().animate({"opacity": "1"}, "fast");
+            });
+
+        // Fade Hover Links
+        J(".entry-title a").hover(
+            function () {
+                J(this).animate({"opacity": ".7"}, "fast");
+            },
+            function () {
+                J(this).animate({"opacity": "1"}, "fast");
+            });
+
+        // Remove Margins
+        J(".flickrPhotos > li:nth-child(2n)").addClass('remove-margin');
+        J('#sidebar > div').last().addClass('last-sidebar');
+
+        // Sticky Sidebar
+        J('#sticky > div').last().addClass('last-sidebar');
+        J("#sticky").sticky({topSpacing: 90, className: 'sticky'});
+
+        J(".lightbox").fancybox({
+            'titlePosition': 'outside',
+            'overlayColor': '#ddd',
+            'overlayOpacity': 0.9,
+            'titleShow': 'false',
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'speedIn': '1400',
+            'speedOut': '1400',
+            'easingIn': 'easeOutBounce',
+            'easingOut': 'easeOutBounce'
+        });
+
+        // Quicksand Filtering
+        var $data = J(".filter-posts").clone();
+
+        J('.filter-list li').click(function (e) {
+            J(".filter li").removeClass("active");
+            // Use the last category class as the category to filter by.
+            var filterClass = J(this).attr('class').split(' ').slice(-1)[0];
+
+            if (filterClass == 'all-projects') {
+                var $filteredData = $data.find('.project');
+            } else {
+                var $filteredData = $data.find('.project[data-type=' + filterClass + ']');
+            }
+            J(".filter-posts").quicksand($filteredData, {
+                duration: 700,
+                easing: 'jswing',
+                adjustHeight: 'dynamic'
+            });
+            J(this).addClass("active");
+            return false;
+        });
+    });
+    /* ]]> */
+</script> -->
+
+<style type="text/css">
+    .light-linen {
+        background: #333 url(images/bg_light_linen.png) fixed;
+    }
+
+    .dark-linen {
+        background: #333 url(images/bg_dark_linen.png) fixed;
+    }
+
+    .dark-stone {
+        background: #32363b url(images/bg_stone_dark.png) fixed;
+    }
+
+    .light-stone {
+        background: #eee url(images/bg_stone.png) fixed;
+    }
+
+    .light-plaid {
+        background: #ccc url(images/bg_plaid.png) fixed;
+    }
+
+    .dark-plaid {
+        background: #323232 url(images/bg_dark_plaid.png) fixed;
+    }
+
+    .light-scales {
+        background: #eee url(images/bg_scales.png) fixed;
+    }
+</style>
+
+<!-- <script type="text/javascript">
+    /* <![CDATA[  */
+
+    var J = jQuery.noConflict();
+
+    J(document).ready(function () {
+
+        //Style Switcher
+        J("li.one").click(function () {
+            J
+            ("body").removeClass('dark-linen , dark-stone , light-stone , light-plaid , dark-plaid , light-scales').addClass("light-linen");
+        });
+
+        J("li.two").click(function () {
+            J
+            ("body").removeClass('light-linen , dark-stone , light-stone , light-plaid , dark-plaid , light-scales').addClass("dark-linen");
+        });
+
+        J("li.three").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , light-stone , light-plaid , dark-plaid , light-scales").addClass("dark-stone");
+        });
+
+        J("li.four").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-plaid , dark-plaid , light-scales").addClass("light-stone");
+        });
+
+        J("li.five").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , dark-plaid , light-scales").addClass("light-plaid");
+        });
+
+        J("li.six").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , light-plaid , light-scales").addClass("dark-plaid");
+        });
+
+        J("li.seven").click(function () {
+            J
+            ("body").removeClass("light-linen , dark-linen , dark-stone , light-stone , light-plaid , dark-plaid").addClass("light-scales");
+        });
+
+    });
+    /* ]]> */ -->
+</script>
+<script>
+    // ????
+    var btn = document.getElementById('loginbtn');
+    btn.addEventListener("click", function () {
+        console.log("click");
+    });
+    jQuery('#loginbtn').bind("click", function () {
+        console.log("click");
+        if(!localStorage.getItem('account')){
+            jQuery(".shade").fadeIn(1000);
+            jQuery("#loginmodal").fadeIn(1000);
+            // $(this).css("display","none");
+            // showShade();
+        }else {
+            localStorage.removeItem('account');
+            window.location.href="index.html";
+            // mui.alert('????????','???','???',function () {
+            //     window.location.href="index.html";
+            // });
+        }
+    });
+    jQuery('#close-btn').bind("click", function () {
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#loginmodal").fadeOut(1000);
+    });
+
+</script>
+<script>
+    // ????reg
+    var btn = document.getElementById('regclose-btn');
+    btn.addEventListener("click", function () {
+        console.log("click");
+    });
+    jQuery('#regbtn').bind("click", function () {
+        console.log("click");
+        jQuery(".shade").fadeIn(1000);
+        jQuery("#regmodal").fadeIn(1000);
+        // $(this).css("display","none");
+        // showShade();
+    });
+    jQuery('#regclose-btn').bind("click", function () {
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#regmodal").fadeOut(1000);
+    });
+
+</script>
+<script>
+    //????infor
+    //???????
+    var btn=document.getElementById('inforclose-btn');
+    btn.addEventListener("click",function () {
+        console.log("click ??");
+    });
+    jQuery('#inforbtn').bind("click",function(){
+        console.log("click");
+        jQuery(".shade").fadeIn(1000);
+        jQuery("#informodal").fadeIn(1000);
+        // $(this).css("display","none");
+        // showShade();
+    });
+    jQuery('#inforclose-btn').bind("click",function(){
+        jQuery(".shade").fadeOut(1000);
+        jQuery("#informodal").fadeOut(1000);
+    });
+</script>
+<script>
+    function small_down(e) {
+        // var osmall = document.getElementById("loginmodal");
+        // var e = e || window.event;
+        // document.onmousemove = function(e) {
+        //     var e = e || window.event;
+        //     osmall.style.left = e.clientX-850 +"px";
+        //     osmall.style.top = e.clientY-180  +"px";
+        // };
+        // /*??????????,??????*/
+        // document.onmouseup = function() {
+        //     document.onmousemove = null;
+        //     document.onmouseup = null;
+        // };
+    }
+
+    function reg_small_down(e) {
+        // var osmall = document.getElementById("regmodal");
+        // var e = e || window.event;
+        // document.onmousemove = function(e) {
+        //     var e = e || window.event;
+        //     osmall.style.left = e.clientX-850 +"px";
+        //     osmall.style.top = e.clientY-180  +"px";
+        // };
+        // /*??????????,??????*/
+        // document.onmouseup = function() {
+        //     document.onmousemove = null;
+        //     document.onmouseup = null;
+        // };
+    }
+</script>
+<script>
+    //???????????url
+    function getimgurl(select) {
+            var imgselect=select;
+            var file = imgselect.files[0];
+            var reader = new FileReader();
+            var imgFile;
+            reader.onload = function (e) {
+                console.log('?????????');
+                imgFile = e.target.result;
+                console.log(imgFile);
+                var img = document.getElementsByClassName("selectimgview");
+                var id=select.id;
+                var no;
+                if(id=="b1"){
+                    no=0;
+                }else if(id=="b2"){
+                    no=1;
+                }else if(id=="b3"){
+                    no=2;
+                }
+                img[no].src = imgFile;
+                img[no].setAttribute('height', '100px');
+                img[no].setAttribute('width', '100px');
+                document.getElementsByClassName('your-img')[no].value = imgFile;
+                document.getElementsByClassName('your-img')[no].setAttribute("disabled", "true");
+
+            };
+            reader.readAsDataURL(file);
+
+
+    }
+
+    function getnetimgurl(net) {
+
+            var yourimg=net;
+            var imgFile = yourimg.value;
+            console.log(imgFile);
+            var no;
+            console.log("net??id?:"+net.id);
+            if(net.id=="n1"){
+                no=0;
+            }else if (net.id=="n2"){
+                no=1;
+            }else if(net.id=="n3"){
+                no=2;
+            }
+            console.log("no?:"+no);
+            var img = document.getElementsByClassName("selectimgview")[no];
+            img.src = imgFile;
+            img.setAttribute('height', '100px');
+            img.setAttribute('width', '100px');
+
+    }
+</script>
+<script type='text/javascript' src="includes/js/ajax.js"></script>
+<script>
+    //?????????????
+    console.log("???????" + localStorage.getItem("account"));
+    // var currentaccount=JSON.parse(localStorage.getItem("account"));
+    // console.log("json?????:"+currentaccount);
+    if (localStorage.getItem("account")) {
+        console.log("??????????:" + localStorage.getItem("account"));
+        var ac = document.getElementById("account");
+        ac.innerHTML = "???:" + localStorage.getItem("account");
+
+        var accountinput = document.getElementById('your-name');
+        accountinput.value = localStorage.getItem("account");
+
+        var loginbtna=document.getElementById('loginbtna');
+        loginbtna.innerText="???";
+    }
+
+    //????????
+    function regfunction() {
+        var account = document.getElementById('reg-account');
+        var password = document.getElementById('reg-password');
+        var password_repeat = document.getElementById('reg-password-repeat');
+        var email = document.getElementById('reg-email');
+        console.log("????????? ???????" + account.value + " " + password.value + " " + password_repeat.value + " " + email.value);
+        var reginfo = {
+            "account": account.value,
+            "password": password.value,
+            "password_repeat": password_repeat.value,
+            "email": email.value
+        }
+        var regsta = ajaxreg(reginfo);
+        console.log("??????");
+        console.log("regsta?" + regsta);
+        if (regsta == "accountlength1") {
+            alert("?????????");
+        } else if (regsta == "accountlength2") {
+            alert("?????????");
+        } else if (regsta == "psdlength") {
+            alert("????????????");
+        } else if (regsta == "repeaterror") {
+            alert("???????????");
+        } else if (regsta == "emailerror") {
+            alert("???????");
+        } else if (regsta == "accountbusy") {
+            alert("??????????");
+        } else if (regsta == "dberror") {
+            alert("??????????,?????????");
+        } else if (regsta == "regsuccess") {
+            alert("?????");
+        } else {
+            alert("??????? ?????????");
+        }
+    }
+
+    // var loginbtn=document.getElementById('log-submit');
+    // console.log(loginbtn);
+    // loginbtn.addEventListener("click",function () {
+    //     console.log("click login");
+    //     login();
+    // });
+    function loginfunction() {
+        console.log("click login");
+        var account = document.getElementById('login-account');
+        var password = document.getElementById('login-password');
+        var loginaccount = account.value;
+        var logininfo = {
+            "account": account.value,
+            "password": password.value
+        }
+        console.log("?????????????????:" + account.value + " " + password.value);
+        var loginsta = ajaxlogin(logininfo);
+        console.log("loginsta?:" + loginsta);
+
+        if (loginsta == "dberror") {
+            alert("??????????????? ?????????")
+        } else if (loginsta == "noaccount") {
+            alert("???????????");
+        } else if (loginsta == "passwordfalse") {
+            alert("??????????????");
+        } else {
+            alert("??????");
+            localStorage.setItem("account", loginaccount);
+            console.log("localstorage account:" + loginaccount);
+            var ac = document.getElementById("account");
+            ac.innerHTML = "???:" + loginaccount;
+
+            var accountinput = document.getElementById('your-name');
+            accountinput.value = loginaccount;
+
+            var loginbtna=document.getElementById('loginbtna');
+            loginbtna.innerText='???';
+        }
+    }
+
+</script>
+<script>
+    //????blog
+    function sendfunction() {
+        console.log("????????blog");
+        var account = document.getElementById('your-name').value;
+        var title = document.getElementById('your-title').value;
+        var img = document.getElementById('n1').value;
+        var img2=document.getElementById('n2').value;
+        var img3=document.getElementById('n3').value;
+        var content = document.getElementById('your-content').value;
+        content = content.replace(/\n|\r\n/g, "<br>");
+        var date = new Date();
+        var month = date.getMonth() + 1;
+        if (account != "" && title != "" && content != "") {
+            var bloginfo = {
+                "author": account,
+                "title": title,
+                "img": img,
+                'img2':img2,
+                'img3':img3,
+                "content": content,
+                "time": date.getFullYear() + "-" + month + "-" + date.getDate(),
+                "style":document.getElementById('styleselect').value
+            }
+            console.log("style??"+document.getElementById('styleselect').value);
+            var sendsta = ajaxsendblog(bloginfo);
+            console.log("sendfunction???????????:" + sendsta);
+            if (sendsta == "sendsuccess") {
+                alert("??????");
+            } else {
+                alert("???????");
+            }
+
+        } else {
+            alert("????????????blog");
+            return false;
+        }
+    }
+</script>
+<script>
+    function intomyblog() {
+        localStorage.setItem("userblog", localStorage.getItem('account'));
+    }
+
+    function intoresou() {
+        localStorage.setItem('uors','r');
+    }
+    function intotuijian() {
+        localStorage.setItem('uors','t');
+    }
+    function intoguanzhu() {
+        localStorage.setItem('uors','guanzhu');
+    }
+    function intofenlei(style) {
+        console.log("??????style:"+localStorage.getItem('style'));
+        localStorage.setItem("style",style.id);
+        console.log("????style:"+localStorage.getItem('style'));
+    }
+
+    // document.getElementById('tesrn').onclick=function () {
+    //     var content=document.getElementById('your-content').value;
+    //     console.log(content);
+    //     var c2=content.replace(/\n|\r\n/g,"<br>");
+    //     console.log("???�I?��?"+c2);
+    // }
+    getmessage();
+</script>
+</body>
+</html>
